@@ -26,7 +26,8 @@ class _LoginPageState extends State<LoginPage> {
       return;
     }
 
-    StoreProvider.of<AppState>(context).dispatch(LoginUserStart(email: _email, password: _password, result: _onResult));
+    StoreProvider.of<AppState>(context).dispatch(
+        LoginUserStart(email: _email, password: _password, result: _onResult));
   }
 
   void _onResult(dynamic action) {

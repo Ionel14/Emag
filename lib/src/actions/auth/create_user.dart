@@ -2,11 +2,14 @@ part of '../index.dart';
 
 @freezed
 class CreateUser with _$CreateUser {
-  const factory CreateUser({required String email, required String password, required ActionResult result}) =
-      CreateUserStart;
+  const factory CreateUser(
+      {required String email,
+      required String password,
+      required ActionResult result}) = CreateUserStart;
 
   @Implements<UserAction>()
   const factory CreateUser.successful(AppUser user) = CreateUserSuccessful;
 
-  const factory CreateUser.error(Object error, StackTrace stackTrace) = CreateUserError;
+  const factory CreateUser.error(Object error, StackTrace stackTrace) =
+      CreateUserError;
 }

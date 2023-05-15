@@ -3,6 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 
 import '../actions/index.dart';
 import '../models/index.dart';
+import 'containers/index.dart';
 
 class CreateUserPage extends StatefulWidget {
   const CreateUserPage({super.key});
@@ -47,41 +48,50 @@ class _CreateUserPage extends State<CreateUserPage> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SafeArea(
-          child: Column(
-            children: <Widget>[
-              TextField(
-                onChanged: (String value) {
-                  _email = value;
-                },
-                decoration: const InputDecoration(hintText: 'email'),
-                keyboardType: TextInputType.emailAddress,
-              ),
-              TextField(
-                onChanged: (String value) {
-                  _password = value;
-                },
-                decoration: const InputDecoration(hintText: 'password'),
-                keyboardType: TextInputType.visiblePassword,
-                obscureText: true,
-              ),
-              const SizedBox(
-                height: 32,
-              ),
-              ElevatedButton(
-                onPressed: _onNext,
-                child: const Text('Create'),
-              ),
-              const SizedBox(
-                height: 32,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, '/login');
-                },
-                child: const Text('Login'),
-              ),
-            ],
-          ),
+          child: PendingContainer(
+              builder: (BuildContext context, Set<String> pending) {
+            return Column(
+              children: <Widget>[
+                TextField(
+                  onChanged: (String value) {
+                    _email = value;
+                  },
+                  decoration: const InputDecoration(hintText: 'email'),
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                TextField(
+                  onChanged: (String value) {
+                    _password = value;
+                  },
+                  decoration: const InputDecoration(hintText: 'password'),
+                  keyboardType: TextInputType.visiblePassword,
+                  obscureText: true,
+                ),
+                const SizedBox(
+                  height: 32,
+                ),
+                if (pending.contains(CreateUser.pendingKey))
+                  const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                else ...<Widget>[
+                  ElevatedButton(
+                    onPressed: _onNext,
+                    child: const Text('Create'),
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(context, '/login');
+                    },
+                    child: const Text('Login'),
+                  ),
+                ]
+              ],
+            );
+          }),
         ),
       ),
     );

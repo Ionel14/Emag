@@ -17,8 +17,7 @@ class HomePage extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.logout),
               onPressed: () {
-                StoreProvider.of<AppState>(context)
-                    .dispatch(const LogOutUser());
+                StoreProvider.of<AppState>(context).dispatch(const LogOutUser());
                 Navigator.pushReplacementNamed(context, '/login');
               },
             ),

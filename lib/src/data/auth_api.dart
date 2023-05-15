@@ -50,4 +50,8 @@ class AuthApi {
       profileUrl: user.photoURL,
     );
   }
+
+  Future<void> logOut() async {
+    await _auth.signOut();
+  }
 }

@@ -10,6 +10,8 @@ Reducer<ProductsState> productsReducer =
   TypedReducer<ProductsState, ListProductsSuccessful>(_listProductsSuccessful)
       .call,
   TypedReducer<ProductsState, SetCategory>(_setCategory).call,
+  TypedReducer<ProductsState, ListVendorsSuccessful>(_listVendorsSuccessful)
+      .call,
 ]);
 
 ProductsState _listCategorySuccessful(
@@ -30,5 +32,12 @@ ProductsState _listProductsSuccessful(
     ProductsState state, ListProductsSuccessful action) {
   return state.copyWith(
     products: action.products,
+  );
+}
+
+ProductsState _listVendorsSuccessful(
+    ProductsState state, ListVendorsSuccessful action) {
+  return state.copyWith(
+    vendors: action.vendors,
   );
 }

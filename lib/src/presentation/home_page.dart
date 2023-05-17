@@ -63,27 +63,33 @@ class HomePage extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 );
               }
-
               return ProductsContainer(
                   builder: (BuildContext context, List<Product> products) {
-                return ListView.separated(
-                  itemCount: products.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final Product product = products[index];
+                return VendorsContainer(
+                  builder: (BuildContext context, List<Vendor> vendors) {
+                    return ListView.separated(
+                      itemCount: products.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final Product product = products[index];
 
-                    return ListTile(
-                      leading: Image.network(
-                        product.image,
-                        fit: BoxFit.cover,
-                        width: 56.0,
-                        height: 56.0,
-                      ),
-                      title: Text(product.title),
-                      subtitle: Text(product.description),
+                        return ListTile(
+                          leading: Image.network(
+                            product.image,
+                            fit: BoxFit.cover,
+                            width: 56.0,
+                            height: 56.0,
+                          ),
+                          title: vendors.isEmpty
+                              ? Text(product.title)
+                              : Text(
+                                  '${product.title} / ${vendors.firstWhere((Vendor vendor) => vendor.id == product.vendorId).name}'),
+                          subtitle: Text(product.description),
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const Divider();
+                      },
                     );
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const Divider();
                   },
                 );
               });

@@ -9,6 +9,7 @@ part 'auth/log_out_user.dart';
 part 'products/list_category.dart';
 part 'products/set.dart';
 part 'products/list_products.dart';
+part 'products/list_vendors.dart';
 part 'index.freezed.dart';
 
 abstract class UserAction {

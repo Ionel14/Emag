@@ -27,4 +27,16 @@ class ProductsApi {
             Product.fromJson(doc.data()))
         .toList();
   }
+
+  Future<List<Vendor>> listVendors(List<String> vendorsIds) async {
+    final QuerySnapshot<Map<String, dynamic>> snapshot = await _firestore
+        .collection('vendors')
+        .where('id', whereIn: vendorsIds)
+        .get();
+
+    return snapshot.docs
+        .map((QueryDocumentSnapshot<Map<String, dynamic>> doc) =>
+            Vendor.fromJson(doc.data()))
+        .toList();
+  }
 }

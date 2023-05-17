@@ -11,16 +11,14 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return UserContainer(builder: (BuildContext context, AppUser? user) {
-      return CategoriesContainer(
-          builder: (BuildContext context, List<Category> categories) {
+      return CategoriesContainer(builder: (BuildContext context, List<Category> categories) {
         return Scaffold(
           appBar: AppBar(
             actions: <Widget>[
               IconButton(
                 icon: const Icon(Icons.logout),
                 onPressed: () {
-                  StoreProvider.of<AppState>(context)
-                      .dispatch(const LogOutUser());
+                  StoreProvider.of<AppState>(context).dispatch(const LogOutUser());
                   Navigator.pushReplacementNamed(context, '/login');
                 },
               ),
@@ -32,8 +30,7 @@ class HomePage extends StatelessWidget {
                     child: SizedBox(
                       height: 56.0,
                       child: SelectedCategoryContainer(
-                        builder:
-                            (BuildContext context, Category selectedCategory) {
+                        builder: (BuildContext context, Category selectedCategory) {
                           return ListView(
                             scrollDirection: Axis.horizontal,
                             children: categories.map((Category category) {
@@ -44,8 +41,7 @@ class HomePage extends StatelessWidget {
                                   if (selected) {
                                     StoreProvider.of<AppState>(context)
                                       ..dispatch(SetCategory(category.id))
-                                      ..dispatch(
-                                          ListProducts.start(category.id));
+                                      ..dispatch(ListProducts.start(category.id));
                                   }
                                 },
                               );
@@ -63,8 +59,7 @@ class HomePage extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 );
               }
-              return ProductsContainer(
-                  builder: (BuildContext context, List<Product> products) {
+              return ProductsContainer(builder: (BuildContext context, List<Product> products) {
                 return VendorsContainer(
                   builder: (BuildContext context, List<Vendor> vendors) {
                     return ListView.separated(

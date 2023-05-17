@@ -10,9 +10,8 @@ class SelectedCategoryContainer extends StatelessWidget {
     return StoreConnector<AppState, Category>(
         builder: builder,
         converter: (Store<AppState> store) {
-          return store.state.products.categories.firstWhere(
-              (Category category) =>
-                  store.state.products.selectedCategoryId == category.id);
+          return store.state.products.categories
+              .firstWhere((Category category) => store.state.products.selectedCategoryId == category.id);
         });
   }
 }

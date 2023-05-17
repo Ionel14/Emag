@@ -7,36 +7,26 @@ class ProductsApi {
   final FirebaseFirestore _firestore;
 
   Future<List<Category>> listCategory() async {
-    final QuerySnapshot<Map<String, dynamic>> snapshot =
-        await _firestore.collection('categories').get();
+    final QuerySnapshot<Map<String, dynamic>> snapshot = await _firestore.collection('categories').get();
 
     return snapshot.docs
-        .map((QueryDocumentSnapshot<Map<String, dynamic>> doc) =>
-            Category.fromJson(doc.data()))
+        .map((QueryDocumentSnapshot<Map<String, dynamic>> doc) => Category.fromJson(doc.data()))
         .toList();
   }
 
   Future<List<Product>> listProducts(String categoryId) async {
-    final QuerySnapshot<Map<String, dynamic>> snapshot = await _firestore
-        .collection('products')
-        .where('categoryId', isEqualTo: categoryId)
-        .get();
+    final QuerySnapshot<Map<String, dynamic>> snapshot =
+        await _firestore.collection('products').where('categoryId', isEqualTo: categoryId).get();
 
     return snapshot.docs
-        .map((QueryDocumentSnapshot<Map<String, dynamic>> doc) =>
-            Product.fromJson(doc.data()))
+        .map((QueryDocumentSnapshot<Map<String, dynamic>> doc) => Product.fromJson(doc.data()))
         .toList();
   }
 
   Future<List<Vendor>> listVendors(List<String> vendorsIds) async {
-    final QuerySnapshot<Map<String, dynamic>> snapshot = await _firestore
-        .collection('vendors')
-        .where('id', whereIn: vendorsIds)
-        .get();
+    final QuerySnapshot<Map<String, dynamic>> snapshot =
+        await _firestore.collection('vendors').where('id', whereIn: vendorsIds).get();
 
-    return snapshot.docs
-        .map((QueryDocumentSnapshot<Map<String, dynamic>> doc) =>
-            Vendor.fromJson(doc.data()))
-        .toList();
+    return snapshot.docs.map((QueryDocumentSnapshot<Map<String, dynamic>> doc) => Vendor.fromJson(doc.data())).toList();
   }
 }

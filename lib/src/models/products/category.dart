@@ -8,8 +8,7 @@ class Category with _$Category implements Comparable<Category> {
     required int icon,
   }) = Category$;
 
-  factory Category.fromJson(Map<dynamic, dynamic> json) =>
-      _$CategoryFromJson(Map<String, dynamic>.from(json));
+  factory Category.fromJson(Map<dynamic, dynamic> json) => _$CategoryFromJson(Map<String, dynamic>.from(json));
 
   const Category._();
 

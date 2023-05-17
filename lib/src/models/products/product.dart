@@ -12,6 +12,5 @@ class Product with _$Product {
     required String vendorId,
   }) = Product$;
 
-  factory Product.fromJson(Map<dynamic, dynamic> json) =>
-      _$ProductFromJson(Map<String, dynamic>.from(json));
+  factory Product.fromJson(Map<dynamic, dynamic> json) => _$ProductFromJson(Map<String, dynamic>.from(json));
 }

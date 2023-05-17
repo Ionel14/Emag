@@ -573,6 +573,7 @@ mixin _$ProductsState {
   List<Product> get products => throw _privateConstructorUsedError;
   List<Category> get categories => throw _privateConstructorUsedError;
   List<Vendor> get vendors => throw _privateConstructorUsedError;
+  String? get selectedCategoryId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -589,7 +590,8 @@ abstract class $ProductsStateCopyWith<$Res> {
   $Res call(
       {List<Product> products,
       List<Category> categories,
-      List<Vendor> vendors});
+      List<Vendor> vendors,
+      String? selectedCategoryId});
 }
 
 /// @nodoc
@@ -608,6 +610,7 @@ class _$ProductsStateCopyWithImpl<$Res, $Val extends ProductsState>
     Object? products = null,
     Object? categories = null,
     Object? vendors = null,
+    Object? selectedCategoryId = freezed,
   }) {
     return _then(_value.copyWith(
       products: null == products
@@ -622,6 +625,10 @@ class _$ProductsStateCopyWithImpl<$Res, $Val extends ProductsState>
           ? _value.vendors
           : vendors // ignore: cast_nullable_to_non_nullable
               as List<Vendor>,
+      selectedCategoryId: freezed == selectedCategoryId
+          ? _value.selectedCategoryId
+          : selectedCategoryId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -637,7 +644,8 @@ abstract class _$$ProductsState$CopyWith<$Res>
   $Res call(
       {List<Product> products,
       List<Category> categories,
-      List<Vendor> vendors});
+      List<Vendor> vendors,
+      String? selectedCategoryId});
 }
 
 /// @nodoc
@@ -654,6 +662,7 @@ class __$$ProductsState$CopyWithImpl<$Res>
     Object? products = null,
     Object? categories = null,
     Object? vendors = null,
+    Object? selectedCategoryId = freezed,
   }) {
     return _then(_$ProductsState$(
       products: null == products
@@ -668,6 +677,10 @@ class __$$ProductsState$CopyWithImpl<$Res>
           ? _value._vendors
           : vendors // ignore: cast_nullable_to_non_nullable
               as List<Vendor>,
+      selectedCategoryId: freezed == selectedCategoryId
+          ? _value.selectedCategoryId
+          : selectedCategoryId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -678,7 +691,8 @@ class _$ProductsState$ implements ProductsState$ {
   const _$ProductsState$(
       {final List<Product> products = const <Product>[],
       final List<Category> categories = const <Category>[],
-      final List<Vendor> vendors = const <Vendor>[]})
+      final List<Vendor> vendors = const <Vendor>[],
+      this.selectedCategoryId})
       : _products = products,
         _categories = categories,
         _vendors = vendors;
@@ -714,8 +728,11 @@ class _$ProductsState$ implements ProductsState$ {
   }
 
   @override
+  final String? selectedCategoryId;
+
+  @override
   String toString() {
-    return 'ProductsState(products: $products, categories: $categories, vendors: $vendors)';
+    return 'ProductsState(products: $products, categories: $categories, vendors: $vendors, selectedCategoryId: $selectedCategoryId)';
   }
 
   @override
@@ -726,7 +743,9 @@ class _$ProductsState$ implements ProductsState$ {
             const DeepCollectionEquality().equals(other._products, _products) &&
             const DeepCollectionEquality()
                 .equals(other._categories, _categories) &&
-            const DeepCollectionEquality().equals(other._vendors, _vendors));
+            const DeepCollectionEquality().equals(other._vendors, _vendors) &&
+            (identical(other.selectedCategoryId, selectedCategoryId) ||
+                other.selectedCategoryId == selectedCategoryId));
   }
 
   @JsonKey(ignore: true)
@@ -735,7 +754,8 @@ class _$ProductsState$ implements ProductsState$ {
       runtimeType,
       const DeepCollectionEquality().hash(_products),
       const DeepCollectionEquality().hash(_categories),
-      const DeepCollectionEquality().hash(_vendors));
+      const DeepCollectionEquality().hash(_vendors),
+      selectedCategoryId);
 
   @JsonKey(ignore: true)
   @override
@@ -755,7 +775,8 @@ abstract class ProductsState$ implements ProductsState {
   const factory ProductsState$(
       {final List<Product> products,
       final List<Category> categories,
-      final List<Vendor> vendors}) = _$ProductsState$;
+      final List<Vendor> vendors,
+      final String? selectedCategoryId}) = _$ProductsState$;
 
   factory ProductsState$.fromJson(Map<String, dynamic> json) =
       _$ProductsState$.fromJson;
@@ -766,6 +787,8 @@ abstract class ProductsState$ implements ProductsState {
   List<Category> get categories;
   @override
   List<Vendor> get vendors;
+  @override
+  String? get selectedCategoryId;
   @override
   @JsonKey(ignore: true)
   _$$ProductsState$CopyWith<_$ProductsState$> get copyWith =>

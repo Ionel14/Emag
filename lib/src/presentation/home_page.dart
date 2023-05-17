@@ -25,23 +25,70 @@ class HomePage extends StatelessWidget {
                 },
               ),
             ],
-            bottom: PreferredSize(
-              preferredSize: const Size.fromHeight(56.0),
-              child: SizedBox(
-                height: 56.0,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: categories.map((Category category) {
-                    return ChoiceChip(
-                      label: Text(category.title),
-                      selected: false,
-                    );
-                  }).toList(),
-                ),
-              ),
-            ),
+            bottom: categories.isEmpty
+                ? null
+                : PreferredSize(
+                    preferredSize: const Size.fromHeight(56.0),
+                    child: SizedBox(
+                      height: 56.0,
+                      child: SelectedCategoryContainer(
+                        builder:
+                            (BuildContext context, Category selectedCategory) {
+                          return ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: categories.map((Category category) {
+                              return ChoiceChip(
+                                label: Text(category.title),
+                                selected: selectedCategory == category,
+                                onSelected: (bool selected) {
+                                  if (selected) {
+                                    StoreProvider.of<AppState>(context)
+                                      ..dispatch(SetCategory(category.id))
+                                      ..dispatch(
+                                          ListProducts.start(category.id));
+                                  }
+                                },
+                              );
+                            }).toList(),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
           ),
-          body: Center(child: Text(user!.displayName)),
+          body: PendingContainer(
+            builder: (BuildContext context, Set<String> pending) {
+              if (pending.contains(ListProducts.pendingKey)) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+
+              return ProductsContainer(
+                  builder: (BuildContext context, List<Product> products) {
+                return ListView.separated(
+                  itemCount: products.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final Product product = products[index];
+
+                    return ListTile(
+                      leading: Image.network(
+                        product.image,
+                        fit: BoxFit.cover,
+                        width: 56.0,
+                        height: 56.0,
+                      ),
+                      title: Text(product.title),
+                      subtitle: Text(product.description),
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return const Divider();
+                  },
+                );
+              });
+            },
+          ),
         );
       });
     });

@@ -7,6 +7,8 @@ part 'auth/login_user.dart';
 part 'auth/check_user.dart';
 part 'auth/log_out_user.dart';
 part 'products/list_category.dart';
+part 'products/set.dart';
+part 'products/list_products.dart';
 part 'index.freezed.dart';
 
 abstract class UserAction {

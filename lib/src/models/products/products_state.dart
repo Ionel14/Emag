@@ -6,6 +6,7 @@ class ProductsState with _$ProductsState {
     @Default(<Product>[]) List<Product> products,
     @Default(<Category>[]) List<Category> categories,
     @Default(<Vendor>[]) List<Vendor> vendors,
+    String? selectedCategoryId,
   }) = ProductsState$;
 
   factory ProductsState.fromJson(Map<dynamic, dynamic> json) =>

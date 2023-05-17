@@ -27,8 +27,8 @@ class _CreateUserPage extends State<CreateUserPage> {
       return;
     }
 
-    StoreProvider.of<AppState>(context)
-        .dispatch(CreateUserStart(email: _email, password: _password, result: _onResult));
+    StoreProvider.of<AppState>(context).dispatch(
+        CreateUserStart(email: _email, password: _password, result: _onResult));
   }
 
   void _onResult(dynamic action) {
@@ -48,7 +48,8 @@ class _CreateUserPage extends State<CreateUserPage> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SafeArea(
-          child: PendingContainer(builder: (BuildContext context, Set<String> pending) {
+          child: PendingContainer(
+              builder: (BuildContext context, Set<String> pending) {
             return Column(
               children: <Widget>[
                 TextField(

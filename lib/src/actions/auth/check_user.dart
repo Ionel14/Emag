@@ -7,5 +7,6 @@ class CheckUser with _$CheckUser {
   @Implements<UserAction>()
   const factory CheckUser.successful(AppUser? user) = CheckUserSuccessful;
 
-  const factory CheckUser.error(Object error, StackTrace stackTrace) = CheckUserError;
+  const factory CheckUser.error(Object error, StackTrace stackTrace) =
+      CheckUserError;
 }

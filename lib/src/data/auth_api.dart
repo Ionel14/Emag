@@ -7,8 +7,10 @@ class AuthApi {
 
   final FirebaseAuth _auth;
 
-  Future<AppUser> createUser({required String email, required String password}) async {
-    final UserCredential credential = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+  Future<AppUser> createUser(
+      {required String email, required String password}) async {
+    final UserCredential credential = await _auth
+        .createUserWithEmailAndPassword(email: email, password: password);
     final User user = credential.user!;
 
     return AppUser(
@@ -18,8 +20,10 @@ class AuthApi {
     );
   }
 
-  Future<AppUser> loginUser({required String email, required String password}) async {
-    final UserCredential credential = await _auth.signInWithEmailAndPassword(email: email, password: password);
+  Future<AppUser> loginUser(
+      {required String email, required String password}) async {
+    final UserCredential credential = await _auth.signInWithEmailAndPassword(
+        email: email, password: password);
     final User user = credential.user!;
 
     return AppUser(
@@ -40,8 +44,9 @@ class AuthApi {
     return AppUser(
       uid: user.uid,
       email: user.email!,
-      displayName:
-          user.displayName == null || user.displayName!.isEmpty ? user.email!.split('@').first : user.displayName!,
+      displayName: user.displayName == null || user.displayName!.isEmpty
+          ? user.email!.split('@').first
+          : user.displayName!,
       profileUrl: user.photoURL,
     );
   }

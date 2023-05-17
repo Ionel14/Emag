@@ -29,6 +29,9 @@ analyzer:
     # Ignore protoc generated files
     - "dev/conductor/lib/proto/*"
     - "lib/firebase_options.dart"
+    - "build/**"
+    - "lib/**.freezed.dart"
+    - "lib/**.g.dart"
 
 linter:
   rules:

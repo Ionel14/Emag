@@ -6,3 +6,4 @@ import '../../models/index.dart';
 
 part 'user_container.dart';
 part 'pending_container.dart';
+part 'categories_container.dart';
